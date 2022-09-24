@@ -32,7 +32,7 @@ const Dashboard = () => {
     return (
            <div className="dashboard">
             <h1>Dashboard</h1>
-
+            <Link to='/posts/create' className="btn btn-success btn-sm">Create New</Link>
             {posts && posts.map(post => (
                 <div className="card card-margins" key={post.id}>
                     <div className="card-body">

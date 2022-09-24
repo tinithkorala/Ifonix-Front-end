@@ -5,6 +5,7 @@ import Register from './pages/Register';
 import axios from "axios";
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
+import Create from './pages/Create';
 
 axios.defaults.baseURL = "http://localhost:8000/";
 axios.defaults.headers.post['Content-Type'] = 'application/json';
@@ -40,6 +41,10 @@ function App() {
 					
 					<Route path="/dashboard">
 						<Dashboard></Dashboard>
+					</Route>
+
+					<Route path="/posts/create">
+						<Create></Create>
 					</Route>
 
 					{/* <Route path="/dashboard">
