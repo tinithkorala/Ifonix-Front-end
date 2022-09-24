@@ -55,6 +55,14 @@ nav {
 }
 /* login page styles end */
 
+/* dashboard page styles start */
+.card-margins {
+  margin-bottom: 10px;
+}
+/* dashboard page styles end */
+
+
+
 
 /* comman styles start */
 .error-message {
