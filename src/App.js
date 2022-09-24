@@ -1,6 +1,6 @@
 import './App.css';
 import Navbar from './components/Navbar';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import Register from './pages/Register';
 import axios from "axios";
 import Dashboard from './pages/Dashboard';
@@ -10,6 +10,12 @@ axios.defaults.baseURL = "http://localhost:8000/";
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 axios.defaults.headers.post['Accept'] = 'application/json';
 axios.defaults.withCredentials = true;
+
+axios.interceptors.request.use(function (config) {
+	const token = localStorage.getItem('auth_token');
+	config.headers.Authorization = token ? `Bearer ${token}` : '';
+	return config;
+});
 
 function App() {
     return (
@@ -22,16 +28,23 @@ function App() {
 				<Switch>
 					
 					<Route exact path="/">
-						<Login></Login>
 					</Route>
 
+					<Route path="/login">
+						{localStorage.getItem('auth_token') ? <Redirect to='/' /> : <Login />}
+					</Route>
+
+					<Route path="/register">
+						{localStorage.getItem('auth_token') ? <Redirect to='/' /> : <Register />}
+					</Route>
+					
 					<Route path="/dashboard">
 						<Dashboard></Dashboard>
 					</Route>
 
-					<Route path="/register">
-						<Register></Register>
-					</Route>
+					{/* <Route path="/dashboard">
+						{localStorage.getItem('auth_token') ?  <Dashboard />  : <Redirect to='/login' from='/dashboard'/>}
+					</Route> */}
 					
 				</Switch>
 
