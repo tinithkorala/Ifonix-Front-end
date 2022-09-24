@@ -52,34 +52,40 @@ const Register = () => {
 
     return (
         <div className="register">
-            <form onSubmit={handleSubmit}>
 
-                <h1>Register Page</h1>
+            <div className="row">
+                <div className="col-md-6 offset-md-3">
+                    <form onSubmit={handleSubmit}>
 
-                <div className="mb-3">
-                    <label className="form-label">Name</label>
-                    <input type="text" className="form-control" name="name" value={register_input.name} onChange={handleInput} />
-                    <p className="text-danger"><b>{register_input.error_list_array.name}</b></p>
+                        <h1 className="page-headings">Register</h1>
+
+                        <div className="mb-3">
+                            <label className="form-label">Name</label>
+                            <input type="text" className="form-control" name="name" value={register_input.name} onChange={handleInput} />
+                            <p className="error-message"><b>{register_input.error_list_array.name}</b></p>
+                        </div>
+                        <div className="mb-3">
+                            <label className="form-label">Email Address</label>
+                            <input type="text" className="form-control" name="email" value={register_input.email} onChange={handleInput} />
+                            <p className="error-message"><b>{register_input.error_list_array.email}</b></p>
+                        </div>
+                        <div className="mb-3">
+                            <label className="form-label">Password</label>
+                            <input type="password" className="form-control" name="password" value={register_input.password} onChange={handleInput} />
+                            <p className="error-message"><b>{register_input.error_list_array.password}</b></p>
+                        </div>
+                        <div className="mb-3">
+                            <label className="form-label">Confirm Password</label>
+                            <input type="password" className="form-control" name="password_confirmation" value={register_input.password_confirmation} onChange={handleInput} />
+                            <p className="error-message"><b>{register_input.error_list_array.password}</b></p> 
+                        </div>
+
+                        <button type="submit" className="btn btn-primary">Submit</button>
+
+                    </form>
                 </div>
-                <div className="mb-3">
-                    <label className="form-label">Email Address</label>
-                    <input type="text" className="form-control" name="email" value={register_input.email} onChange={handleInput} />
-                    <p className="text-danger"><b>{register_input.error_list_array.email}</b></p>
-                </div>
-                <div className="mb-3">
-                    <label className="form-label">Password</label>
-                    <input type="password" className="form-control" name="password" value={register_input.password} onChange={handleInput} />
-                    <p className="text-danger"><b>{register_input.error_list_array.password}</b></p>
-                </div>
-                <div className="mb-3">
-                    <label className="form-label">Confirm Password</label>
-                    <input type="password" className="form-control" name="password_confirmation" value={register_input.password_confirmation} onChange={handleInput} />
-                    <p className="text-danger"><b>{register_input.error_list_array.password}</b></p> 
-                </div>
+            </div>
             
-                <button type="submit" className="btn btn-primary">Submit</button>
-
-            </form>
         </div>
     );
 }

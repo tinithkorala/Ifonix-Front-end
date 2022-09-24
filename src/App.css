@@ -36,3 +36,34 @@
     transform: rotate(360deg);
   }
 } */
+
+/* navbar styles start */
+nav {
+
+}
+/* navbar styles end */
+
+/* register page styles start */
+.register {
+    margin-top: 30px;
+}
+/* register page styles end */
+
+/* login page styles start */
+.login {
+    margin-top: 30px;
+}
+/* login page styles end */
+
+
+/* comman styles start */
+.error-message {
+    color: #d51717;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.page-headings {
+    text-align: center;
+}
+/* comman styles end */
