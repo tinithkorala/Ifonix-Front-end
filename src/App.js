@@ -9,7 +9,7 @@ import Create from './pages/Create';
 import ManagePosts from './pages/ManagePosts';
 import Search from './pages/Search';
 import ViewPost from './pages/ViewPost';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import GuardedRoutes from './components/GuardedRoutes';
 
 axios.defaults.baseURL = "http://localhost:8000/";
@@ -26,16 +26,16 @@ axios.interceptors.request.use(function (config) {
 
 function App() {
 
-	const [isAuthenticated, setIsAuthenticated] = useState(false);
+	const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem('auth_token') ? true : false);
 
 	const handleAuthStatus = (status) => {
-		setIsAuthenticated(status)
+		setIsAuthenticated(status);
 	}
 
     return (
 		<Router>
 
-			<Navbar handleAuthStatus={handleAuthStatus}></Navbar>	
+			<Navbar handleAuthStatus={handleAuthStatus} isAuthenticated={isAuthenticated}></Navbar>	
 
 			<div className="container">
 
@@ -45,13 +45,13 @@ function App() {
 					</Route>
 
 					<Route path="/login">
-						{localStorage.getItem('auth_token') ? <Redirect to='/' /> : <Login handleAuthStatus={handleAuthStatus}  />}
+						{isAuthenticated ? <Redirect to='/dashboard' /> : <Login handleAuthStatus={handleAuthStatus}  />}
 					</Route>
 
 					<Route path="/register">
-						{localStorage.getItem('auth_token') ? <Redirect to='/' /> : <Register handleAuthStatus={handleAuthStatus}/>}
+						{isAuthenticated ? <Redirect to='/dashboard' /> : <Register handleAuthStatus={handleAuthStatus}/>}
 					</Route>
-					
+
 					{/* this routs need to be protected */}
 					{/* <Route path="/dashboard">
 						<Dashboard></Dashboard>

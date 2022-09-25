@@ -2,7 +2,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 
-const Navbar = ({handleAuthStatus}) => {
+const Navbar = ({handleAuthStatus, isAuthenticated}) => {
 
     const history = useHistory();
 
@@ -14,7 +14,7 @@ const Navbar = ({handleAuthStatus}) => {
 
                 localStorage.removeItem('auth_token');
                 localStorage.removeItem('auth_name');
-                handleAuthStatus(false)
+                handleAuthStatus(false);
                 console.log(res.data.message)
                 history.push('/login');
 
@@ -25,8 +25,9 @@ const Navbar = ({handleAuthStatus}) => {
     }
 
     let auth_buttons = "";
+    let protected_links = "";
 
-    if(!localStorage.getItem('auth_token')) {
+    if(!isAuthenticated) {
 
         auth_buttons = (<div className="d-flex">
                             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
@@ -39,6 +40,8 @@ const Navbar = ({handleAuthStatus}) => {
                             </ul>
                         </div>);
 
+        protected_links = (<ul className="navbar-nav me-auto mb-2 mb-lg-0"></ul>)
+
     }else {
 
         auth_buttons = (<div className="d-flex">
@@ -49,27 +52,29 @@ const Navbar = ({handleAuthStatus}) => {
                             </ul>
                         </div>);
 
+        protected_links =   (<ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                                <li className="nav-item">
+                                    <Link className="nav-link active" aria-current="page" to="/dashboard">Dashboard</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link active" aria-current="page" to="/posts-manage">Manage Posts</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link active" aria-current="page" to="/posts/search">Search Posts</Link>
+                                </li>
+                            </ul>);
+
     }
 
     return (<nav className="navbar navbar-expand-lg navbar-light bg-light">
                 <div className="container-fluid">
-                <a className="navbar-brand" href="#">Navbar</a>
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
+                    <Link className="navbar-brand" to='/'>ABC</Link>
+                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"></span>
+                    </button>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li className="nav-item">
-                                <Link className="nav-link active" aria-current="page" to="/dashboard">Dashboard (p:*) </Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link active" aria-current="page" to="/posts-manage">Manage Posts (p:*)</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link active" aria-current="page" to="/posts/search">Search Posts (p:*)</Link>
-                            </li>
-                        </ul>
-
+                        
+                        {protected_links}
                         
                         {auth_buttons}
 
