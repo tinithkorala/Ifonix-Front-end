@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 
-const Register = () => {
+const Register = ({handleAuthStatus}) => {
 
     const history = useHistory();
 
@@ -36,6 +36,7 @@ const Register = () => {
 
                     localStorage.setItem('auth_token', res.data.token);
                     localStorage.setItem('auth_name', res.data.user_name);
+                    handleAuthStatus(true);
                     alert(res.data.message);
                     history.push('/');
 

@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 
-const Login = () => {
+const Login = ({handleAuthStatus}) => {
 
     const history = useHistory();
 
@@ -17,9 +17,6 @@ const Login = () => {
             ...login_input,
             [e.target.name] : e.target.value
         });
-
-        console.log(login_input);
-
     }
 
     const handleSubmit = (e) => {
@@ -39,6 +36,7 @@ const Login = () => {
 
                     localStorage.setItem('auth_token', res.data.token);
                     localStorage.setItem('auth_name', res.data.user_name);
+                    handleAuthStatus(true);
                     console.log(res.data.message);
                     history.push('/dashboard');
 

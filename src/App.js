@@ -9,6 +9,8 @@ import Create from './pages/Create';
 import ManagePosts from './pages/ManagePosts';
 import Search from './pages/Search';
 import ViewPost from './pages/ViewPost';
+import { useState } from 'react';
+import GuardedRoutes from './components/GuardedRoutes';
 
 axios.defaults.baseURL = "http://localhost:8000/";
 axios.defaults.headers.post['Content-Type'] = 'application/json';
@@ -21,11 +23,19 @@ axios.interceptors.request.use(function (config) {
 	return config;
 });
 
+
 function App() {
+
+	const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+	const handleAuthStatus = (status) => {
+		setIsAuthenticated(status)
+	}
+
     return (
 		<Router>
 
-			<Navbar></Navbar>	
+			<Navbar handleAuthStatus={handleAuthStatus}></Navbar>	
 
 			<div className="container">
 
@@ -35,19 +45,19 @@ function App() {
 					</Route>
 
 					<Route path="/login">
-						{localStorage.getItem('auth_token') ? <Redirect to='/' /> : <Login />}
+						{localStorage.getItem('auth_token') ? <Redirect to='/' /> : <Login handleAuthStatus={handleAuthStatus}  />}
 					</Route>
 
 					<Route path="/register">
-						{localStorage.getItem('auth_token') ? <Redirect to='/' /> : <Register />}
+						{localStorage.getItem('auth_token') ? <Redirect to='/' /> : <Register handleAuthStatus={handleAuthStatus}/>}
 					</Route>
 					
 					{/* this routs need to be protected */}
-					<Route path="/dashboard">
+					{/* <Route path="/dashboard">
 						<Dashboard></Dashboard>
-					</Route>
+					</Route> */}
 
-					<Route path="/posts-manage">
+					{/* <Route path="/posts-manage">
 						<ManagePosts></ManagePosts>
 					</Route>
 
@@ -61,10 +71,17 @@ function App() {
 
 					<Route path="/posts/:id">
 						<ViewPost></ViewPost>
-					</Route>
+					</Route> */}
 
 					{/* this routs need to be protected */}
-
+					
+					{/* Guarded routes start */}
+					<GuardedRoutes path="/dashboard" component={Dashboard} auth={isAuthenticated} />
+					<GuardedRoutes path="/posts-manage" component={ManagePosts} auth={isAuthenticated} />
+					<GuardedRoutes path="/posts/create" component={Create} auth={isAuthenticated} />
+					<GuardedRoutes path="/posts/search" component={Search} auth={isAuthenticated} />
+					<GuardedRoutes path="/posts/:id" component={ViewPost} auth={isAuthenticated} />
+					{/* Guarded routes end */}
 					
 				</Switch>
 

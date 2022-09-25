@@ -2,7 +2,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({handleAuthStatus}) => {
 
     const history = useHistory();
 
@@ -14,6 +14,7 @@ const Navbar = () => {
 
                 localStorage.removeItem('auth_token');
                 localStorage.removeItem('auth_name');
+                handleAuthStatus(false)
                 console.log(res.data.message)
                 history.push('/login');
 
