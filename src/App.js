@@ -11,6 +11,7 @@ import Search from './pages/Search';
 import ViewPost from './pages/ViewPost';
 import { useEffect, useState } from 'react';
 import GuardedRoutes from './components/GuardedRoutes';
+import AdminGuardedRoutes from './components/AdminGuardedRoutes';
 
 axios.defaults.baseURL = "http://localhost:8000/";
 axios.defaults.headers.post['Content-Type'] = 'application/json';
@@ -82,11 +83,15 @@ function App() {
 					
 					{/* Guarded routes start */}
 					<GuardedRoutes path="/dashboard" component={Dashboard} auth={isAuthenticated} />
-					<GuardedRoutes path="/posts-manage" component={ManagePosts} auth={isAuthenticated} />
 					<GuardedRoutes path="/posts/create" component={Create} auth={isAuthenticated} />
 					<GuardedRoutes path="/posts/search" component={Search} auth={isAuthenticated} />
 					<GuardedRoutes path="/posts/:id" component={ViewPost} auth={isAuthenticated} />
 					{/* Guarded routes end */}
+
+					{/* Admin Guarded routes start */}
+					<AdminGuardedRoutes path="/posts-manage" component={ManagePosts} auth={isAuthenticated} userType={userType} />
+					{/* Admin Guarded routes end */}
+
 					
 				</Switch>
 
