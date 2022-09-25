@@ -15,7 +15,7 @@ const ManagePosts = () => {
     const getAllPosts = () => {
 
         axios.get('/sanctum/csrf-cookie').then(response => {
-            axios.get('api/posts')
+            axios.get('api/posts-approve-reject')
             .then((res) => {
                 if(res.status === 200) {
                     setPosts(res.data);
