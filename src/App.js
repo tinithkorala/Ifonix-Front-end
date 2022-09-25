@@ -28,10 +28,15 @@ axios.interceptors.request.use(function (config) {
 function App() {
 
 	const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem('auth_token') ? true : false);
+	const [user_id, setUserId] = useState(localStorage.getItem('auth_id'));
 	const [userType, setUserType] = useState(localStorage.getItem('auth_user_type'));
 
 	const handleAuthStatus = (status) => {
 		setIsAuthenticated(status);
+	}
+
+	const handleUserId = (status) => {
+		setUserId(status);
 	}
 
 	const handleUserTypeStatus = (status) => {
@@ -51,11 +56,22 @@ function App() {
 					</Route>
 
 					<Route path="/login">
-						{isAuthenticated ? <Redirect to='/dashboard' /> : <Login handleAuthStatus={handleAuthStatus} handleUserTypeStatus={handleUserTypeStatus} />}
+						{	isAuthenticated ? 
+							<Redirect to='/dashboard' /> : 
+							<Login handleAuthStatus={handleAuthStatus} 
+							handleUserTypeStatus={handleUserTypeStatus}  
+							handleUserId={handleUserId} />
+						}
 					</Route>
 
 					<Route path="/register">
-						{isAuthenticated ? <Redirect to='/dashboard' /> : <Register handleAuthStatus={handleAuthStatus} handleUserTypeStatus={handleUserTypeStatus}/>}
+						{	isAuthenticated ? 
+							<Redirect to='/dashboard' /> : 
+							<Register 
+							handleAuthStatus={handleAuthStatus} 
+							handleUserTypeStatus={handleUserTypeStatus}
+							handleUserId={handleUserId} />
+						}
 					</Route>
 
 					{/* this routs need to be protected */}
@@ -82,10 +98,10 @@ function App() {
 					{/* this routs need to be protected */}
 					
 					{/* Guarded routes start */}
-					<GuardedRoutes path="/dashboard" component={Dashboard} auth={isAuthenticated} />
-					<GuardedRoutes path="/posts/create" component={Create} auth={isAuthenticated} />
-					<GuardedRoutes path="/posts/search" component={Search} auth={isAuthenticated} />
-					<GuardedRoutes path="/posts/:id" component={ViewPost} auth={isAuthenticated} />
+					<GuardedRoutes path="/dashboard" component={Dashboard} auth={isAuthenticated} user_id={user_id} />
+					<GuardedRoutes path="/posts/create" component={Create} auth={isAuthenticated} user_id={user_id} />
+					<GuardedRoutes path="/posts/search" component={Search} auth={isAuthenticated} user_id={user_id} />
+					<GuardedRoutes path="/posts/:id" component={ViewPost} auth={isAuthenticated} user_id={user_id} />
 					{/* Guarded routes end */}
 
 					{/* Admin Guarded routes start */}

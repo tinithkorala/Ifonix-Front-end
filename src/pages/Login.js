@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 
-const Login = ({handleAuthStatus, handleUserTypeStatus}) => {
+const Login = ({handleAuthStatus, handleUserTypeStatus, handleUserId}) => {
 
     const history = useHistory();
 
@@ -35,9 +35,11 @@ const Login = ({handleAuthStatus, handleUserTypeStatus}) => {
 
                     localStorage.setItem('auth_token', res.data.token);
                     localStorage.setItem('auth_name', res.data.user_name);
+                    localStorage.setItem('auth_id', res.data.user_id);
                     localStorage.setItem('auth_user_type', res.data.auth_user_type);
                     handleAuthStatus(true);
                     handleUserTypeStatus(localStorage.getItem('auth_user_type'));
+                    handleUserId(localStorage.getItem('auth_id'));
                     console.log(res.data.message);
                     history.push('/dashboard');
 
