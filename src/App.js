@@ -6,6 +6,7 @@ import axios from "axios";
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import Create from './pages/Create';
+import ManagePosts from './pages/ManagePosts';
 
 axios.defaults.baseURL = "http://localhost:8000/";
 axios.defaults.headers.post['Content-Type'] = 'application/json';
@@ -39,17 +40,21 @@ function App() {
 						{localStorage.getItem('auth_token') ? <Redirect to='/' /> : <Register />}
 					</Route>
 					
+					{/* this routs need to be protected */}
 					<Route path="/dashboard">
 						<Dashboard></Dashboard>
+					</Route>
+
+					<Route path="/posts-manage">
+						<ManagePosts></ManagePosts>
 					</Route>
 
 					<Route path="/posts/create">
 						<Create></Create>
 					</Route>
 
-					{/* <Route path="/dashboard">
-						{localStorage.getItem('auth_token') ?  <Dashboard />  : <Redirect to='/login' from='/dashboard'/>}
-					</Route> */}
+					{/* this routs need to be protected */}
+
 					
 				</Switch>
 

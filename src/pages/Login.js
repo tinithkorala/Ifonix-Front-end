@@ -17,11 +17,15 @@ const Login = () => {
             ...login_input,
             [e.target.name] : e.target.value
         });
+
+        console.log(login_input);
+
     }
 
     const handleSubmit = (e) => {
 
         e.preventDefault();
+
 
         const submit_data_obj = {
             'email' : login_input.email,
