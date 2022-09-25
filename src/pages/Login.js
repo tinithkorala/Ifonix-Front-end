@@ -23,7 +23,6 @@ const Login = ({handleAuthStatus}) => {
 
         e.preventDefault();
 
-
         const submit_data_obj = {
             'email' : login_input.email,
             'password' : login_input.password,
@@ -36,6 +35,7 @@ const Login = ({handleAuthStatus}) => {
 
                     localStorage.setItem('auth_token', res.data.token);
                     localStorage.setItem('auth_name', res.data.user_name);
+                    localStorage.setItem('auth_user_type', res.data.auth_user_type);
                     handleAuthStatus(true);
                     console.log(res.data.message);
                     history.push('/dashboard');

@@ -36,6 +36,7 @@ const Register = ({handleAuthStatus}) => {
 
                     localStorage.setItem('auth_token', res.data.token);
                     localStorage.setItem('auth_name', res.data.user_name);
+                    localStorage.setItem('auth_user_type', res.data.auth_user_type);
                     handleAuthStatus(true);
                     alert(res.data.message);
                     history.push('/');
