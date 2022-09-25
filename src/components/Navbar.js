@@ -64,6 +64,9 @@ const Navbar = () => {
                             <li className="nav-item">
                                 <Link className="nav-link active" aria-current="page" to="/posts-manage">Manage Posts (p:*)</Link>
                             </li>
+                            <li className="nav-item">
+                                <Link className="nav-link active" aria-current="page" to="/posts/search">Search Posts (p:*)</Link>
+                            </li>
                         </ul>
 
                         

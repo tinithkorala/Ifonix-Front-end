@@ -7,6 +7,7 @@ import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import Create from './pages/Create';
 import ManagePosts from './pages/ManagePosts';
+import Search from './pages/Search';
 
 axios.defaults.baseURL = "http://localhost:8000/";
 axios.defaults.headers.post['Content-Type'] = 'application/json';
@@ -51,6 +52,10 @@ function App() {
 
 					<Route path="/posts/create">
 						<Create></Create>
+					</Route>
+
+					<Route path="/posts/search">
+						<Search></Search>
 					</Route>
 
 					{/* this routs need to be protected */}
