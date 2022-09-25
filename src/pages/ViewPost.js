@@ -10,13 +10,21 @@ const ViewPost = (props) => {
 
     const [post, setPost] = useState()
 
+    useEffect(() => {
+        getAllPost();
+    }, []);
 
-    axios.get('/sanctum/csrf-cookie').then(response => {
-        axios.get('api/posts/'+id)
-        .then((res) => {
-            setPost(res.data);
+    const getAllPost = () => {
+
+        axios.get('/sanctum/csrf-cookie').then(response => {
+            axios.get('api/posts/'+id)
+            .then((res) => {
+                setPost(res.data);
+            });
+            console.log("running axios");
         });
-    });
+
+    }
 
     const history = useHistory()
 
