@@ -27,15 +27,20 @@ axios.interceptors.request.use(function (config) {
 function App() {
 
 	const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem('auth_token') ? true : false);
+	const [userType, setUserType] = useState(localStorage.getItem('auth_user_type'));
 
 	const handleAuthStatus = (status) => {
 		setIsAuthenticated(status);
 	}
 
+	const handleUserTypeStatus = (status) => {
+		setUserType(status);
+	}
+
     return (
 		<Router>
 
-			<Navbar handleAuthStatus={handleAuthStatus} isAuthenticated={isAuthenticated}></Navbar>	
+			<Navbar handleAuthStatus={handleAuthStatus} isAuthenticated={isAuthenticated} userType={userType}></Navbar>	
 
 			<div className="container">
 
@@ -45,11 +50,11 @@ function App() {
 					</Route>
 
 					<Route path="/login">
-						{isAuthenticated ? <Redirect to='/dashboard' /> : <Login handleAuthStatus={handleAuthStatus}  />}
+						{isAuthenticated ? <Redirect to='/dashboard' /> : <Login handleAuthStatus={handleAuthStatus} handleUserTypeStatus={handleUserTypeStatus} />}
 					</Route>
 
 					<Route path="/register">
-						{isAuthenticated ? <Redirect to='/dashboard' /> : <Register handleAuthStatus={handleAuthStatus}/>}
+						{isAuthenticated ? <Redirect to='/dashboard' /> : <Register handleAuthStatus={handleAuthStatus} handleUserTypeStatus={handleUserTypeStatus}/>}
 					</Route>
 
 					{/* this routs need to be protected */}

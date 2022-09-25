@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 
-const Register = ({handleAuthStatus}) => {
+const Register = ({handleAuthStatus, handleUserTypeStatus}) => {
 
     const history = useHistory();
 
@@ -38,8 +38,9 @@ const Register = ({handleAuthStatus}) => {
                     localStorage.setItem('auth_name', res.data.user_name);
                     localStorage.setItem('auth_user_type', res.data.auth_user_type);
                     handleAuthStatus(true);
+                    handleUserTypeStatus(localStorage.getItem('auth_user_type'))
                     alert(res.data.message);
-                    history.push('/');
+                    history.push('/dashboard');
 
                 }else if(res.data.status === 400) {
                 

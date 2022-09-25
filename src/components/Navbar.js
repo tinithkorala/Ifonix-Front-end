@@ -2,7 +2,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 
-const Navbar = ({handleAuthStatus, isAuthenticated}) => {
+const Navbar = ({handleAuthStatus, isAuthenticated, userType}) => {
 
     const history = useHistory();
 
@@ -56,9 +56,11 @@ const Navbar = ({handleAuthStatus, isAuthenticated}) => {
                                 <li className="nav-item">
                                     <Link className="nav-link active" aria-current="page" to="/dashboard">Dashboard</Link>
                                 </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link active" aria-current="page" to="/posts-manage">Manage Posts</Link>
-                                </li>
+                                {(userType == 1) && 
+                                    (<li className="nav-item">
+                                        <Link className="nav-link active" aria-current="page" to="/posts-manage">Manage Posts</Link>
+                                    </li>)
+                                }
                                 <li className="nav-item">
                                     <Link className="nav-link active" aria-current="page" to="/posts/search">Search Posts</Link>
                                 </li>
