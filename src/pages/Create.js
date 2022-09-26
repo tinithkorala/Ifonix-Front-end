@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import Swal from 'sweetalert2';
 
 const Create = () => {
 
@@ -34,23 +35,37 @@ const Create = () => {
             axios.post('api/posts', submit_data_obj)
             .then((res) => {
 
-                if(res.data.status === 400) {
+                if(res.data.status === 204) {
                     setPostInput({
                         ...post_input,
                         'error_list_array' : res.data.validation_errors
                     });
-                }else if(res.data.status === 200) {
+                }else if(res.data.status === 201) {
                     setPostInput({
                         ...post_input,
                         'error_list_array' : []
                     }); 
-                    console.log(res.data.message);
+                    Swal.fire({
+                        icon: 'success',
+                        text: res.data.message,
+                    })
                     history.push('/dashboard');
+                }else if(res.data.status === 503) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: res.data.message,
+                    });
                 }
 
             })
             .catch(err => {
-                console.log(err);
+                console.log(err.message);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Try Again Later',
+                });
             });
 
         });
