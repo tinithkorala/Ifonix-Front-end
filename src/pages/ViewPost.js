@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
+import Swal from 'sweetalert2';
 
 const ViewPost = (props) => {
 
@@ -11,17 +12,36 @@ const ViewPost = (props) => {
     const [post, setPost] = useState()
 
     useEffect(() => {
-        getAllPost();
+        getPost();
     }, []);
 
-    const getAllPost = () => {
+    const getPost = () => {
 
         axios.get('/sanctum/csrf-cookie').then(response => {
             axios.get('api/posts/'+id)
             .then((res) => {
-                setPost(res.data);
+
+                if(res.data.status === 200)  {
+
+                    setPost(res.data.data_set);
+
+                }else if(res.data.status === 503) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: res.data.message,
+                    });
+                }
+
+            })
+            .catch(err => {
+                console.log(err.message);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Try Again Later',
+                });
             });
-            console.log("running axios");
         });
 
     }
@@ -33,12 +53,27 @@ const ViewPost = (props) => {
         axios.get('/sanctum/csrf-cookie').then(response => {
             axios.delete('api/posts/'+post.id)
             .then((res) => {
-                if(res.status === 200) {
-                    if(res.data) {
-                        console.log('Post Deleted');
-                        history.push('/dashboard');
-                    }
+                if(res.data.status === 201) {
+                    Swal.fire({
+                        icon: 'success',
+                        text: res.data.message,
+                    })
+                    history.push('/dashboard');
+                }else if(res.data.status === 503) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: res.data.message,
+                    });
                 }
+            }) 
+            .catch(err => {
+                console.log(err.message);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Try Again Later',
+                });
             });
         });
 
