@@ -17,10 +17,14 @@ const Dashboard = () => {
         axios.get('/sanctum/csrf-cookie').then(response => {
             axios.get('api/posts')
             .then((res) => {
-                if(res.status === 200) {
-                    setPosts(res.data);
-                }else {
-                    console.log("error while fetching data")
+                if(res.data.status === 200) {
+                    setPosts(res.data.data_set);
+                }else if(res.data.status === 503) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: res.data.message,
+                    });
                 }
             })
             .catch(err => {
