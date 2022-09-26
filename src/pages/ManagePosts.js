@@ -40,7 +40,7 @@ const ManagePosts = () => {
         }
 
         axios.get('/sanctum/csrf-cookie').then(response => {
-            axios.put('api/posts-manage', submit_data_obj)
+            axios.put('api/posts/'+id, submit_data_obj)
             .then((res) => {
                 if(res.data.status === 200) {
                     setIsLoadAgain(true);
