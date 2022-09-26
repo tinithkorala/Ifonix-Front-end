@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import Swal from 'sweetalert2';
 
 const Dashboard = () => {
 
@@ -23,7 +24,12 @@ const Dashboard = () => {
                 }
             })
             .catch(err => {
-                console.log(err);
+                console.log(err.message);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Try Again Later',
+                });
             });
         });
 
