@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import Swal from 'sweetalert2';
 
 const Search = () => {
 
@@ -14,12 +15,24 @@ const Search = () => {
         axios.get('/sanctum/csrf-cookie').then(response => {
             axios.get(`api/posts/search/?search=${search}`)
             .then((res) => {
-                if(res.status === 200) {
-                    setPosts(res.data);
-                }else {
-                    console.log("error while fetching data")
+                if(res.data.status === 200) {
+                    setPosts(res.data.data_set);
+                }else if(res.data.status === 503) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: res.data.message,
+                    });
                 }
             })
+            .catch(err => {
+                console.log(err.message);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Try Again Later',
+                });
+            });
         });
         
 
@@ -31,6 +44,7 @@ const Search = () => {
             <div className="col-md-10">
                 <form onSubmit={handleSubmit}>
                     <input type="text" name="search_data" value={search} onChange={(e) => setSearch(e.target.value)} className="form-control" />
+                    <p>{posts ? posts.length : 0} records found</p>
                     <button>Search</button>
                 </form>
             </div>
