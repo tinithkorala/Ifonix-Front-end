@@ -74,21 +74,35 @@ const Create = () => {
 
     return (
         <div className="create-view">
-            <h1>Create Post</h1>
-            <form onSubmit={handleSubmit}>
-                <div className="mb-3">
-                    <label  className="form-label">Title</label>
-                    <input type="text" name="title" onChange={handleInput} value={post_input.name} className="form-control" />
-                    <p className="error-message"><b>{post_input.error_list_array.title}</b></p>
-                </div>
-                <div className="mb-3">
-                    <label  className="form-label">Description</label>
-                    <textarea type="text" name="description" onChange={handleInput} value={post_input.description} className="form-control"></textarea>
-                    <p className="error-message"><b>{post_input.error_list_array.description}</b></p>
-                </div>
+
+            <div className="row">
+
+                <div className="col-md-4 offset-md-4">
+
+                    <form onSubmit={handleSubmit}>
+
+                        <h1 className="page-headings">Create Post</h1>
+
+                        <div className="mb-3">
+                            <label  className="form-label">Title</label>
+                            <input type="text" name="title" onChange={handleInput} value={post_input.name} className="form-control" />
+                            <p className="error-message"><b>{post_input.error_list_array.title}</b></p>
+                        </div>
+
+                        <div className="mb-3">
+                            <label  className="form-label">Description</label>
+                            <textarea type="text" name="description" onChange={handleInput} value={post_input.description} className="form-control"></textarea>
+                            <p className="error-message"><b>{post_input.error_list_array.description}</b></p>
+                        </div>
             
-                <button type="submit" className="btn btn-primary">Submit</button>
-            </form>
+                        <button type="submit" className="btn btn-primary">Create Post</button>
+                    
+                    </form>
+
+                </div>
+
+            </div>
+
         </div>
     );
 }

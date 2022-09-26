@@ -40,16 +40,22 @@ const Search = () => {
 
     return (
         <div className="content">
-            <h1>Search Posts</h1>
-            <div className="col-md-10">
-                <form onSubmit={handleSubmit}>
-                    <input type="text" name="search_data" value={search} onChange={(e) => setSearch(e.target.value)} className="form-control" />
-                    <p>{posts ? posts.length : 0} records found</p>
-                    <button>Search</button>
-                </form>
+
+            <div className="row header">
+                <h1 className="col-6">Search Posts</h1>
+                <div className="col-6">
+                    <form onSubmit={handleSubmit} className="float-end">
+                        <div className="input-group mt-2">
+                            <input type="text" name="search_data" value={search} onChange={(e) => setSearch(e.target.value)} className="form-control" />
+                            <button className="btn btn-primary">Search</button>
+                        </div>
+                    </form>
+                </div>
             </div>
 
-            <div className="col-md-10">
+            <p>{posts ? posts.length : 0} records found</p>
+
+            <div className="col-md-12">
                 {posts && posts.map(post => (
                     <div className="card card-margins" key={post.id}>
                         <div className="card-body">
@@ -60,6 +66,7 @@ const Search = () => {
                     </div>
                 ))}
             </div>
+
         </div>
     );
 }

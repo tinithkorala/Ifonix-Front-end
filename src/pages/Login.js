@@ -65,10 +65,10 @@ const Login = ({handleAuthStatus, handleUserTypeStatus, handleUserId}) => {
 
     }
 
-    return (<div className="login">
+    return (<div className="login align-middle">
 
                 <div className="row">
-                    <div className="col-md-6 offset-md-3">
+                    <div className="col-md-4 offset-md-4">
                         <form onSubmit={handleSubmit}>
 
                             <h1 className="page-headings">Login</h1>
@@ -84,7 +84,7 @@ const Login = ({handleAuthStatus, handleUserTypeStatus, handleUserId}) => {
                                 <p className="error-message"><b>{login_input.error_list.password}</b></p>
                             </div>
 
-                            <button type="submit" className="btn btn-primary">Submit</button>
+                            <button type="submit" className="btn btn-primary">Login</button>
 
                         </form>
                     </div>

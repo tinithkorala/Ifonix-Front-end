@@ -80,11 +80,18 @@ const ManagePosts = () => {
         <div className="content">
             <h1>Manage Posts</h1>
             <table className="table table-hover">
+
+                <colgroup>
+                    <col width="15%"/>
+                    <col width="65%"/>
+                    <col width="20%"/>
+                </colgroup>
+
                 <thead>
                     <tr>
-                        <th>Title</th>
-                        <th>Description</th>
-                        <th>Action</th>
+                        <th className="text-center" scope="col">Title</th>
+                        <th className="text-center" scope="col">Description</th>
+                        <th className="text-center" scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -92,9 +99,11 @@ const ManagePosts = () => {
                     <tr key={post.id}>
                         <td>{post.title}</td>
                         <td>{post.description}</td>
-                        <td>
-                            <button type="button" onClick={(e) => handleApproveReject(e, post.id, true)}>Approved</button>
-                            <button type="button" onClick={(e) => handleApproveReject(e, post.id, false)}>UnApproved</button>
+                        <td className="text-center">
+                            <div className="btn-group">
+                                <button className="btn btn-success" type="button" onClick={(e) => handleApproveReject(e, post.id, true)}>Approve</button>
+                                <button className="btn btn-danger" type="button" onClick={(e) => handleApproveReject(e, post.id, false)}>Reject</button>
+                            </div>
                         </td>
                     </tr>
                 ))}

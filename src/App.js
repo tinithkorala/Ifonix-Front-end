@@ -12,6 +12,7 @@ import ViewPost from './pages/ViewPost';
 import { useEffect, useState } from 'react';
 import GuardedRoutes from './components/GuardedRoutes';
 import AdminGuardedRoutes from './components/AdminGuardedRoutes';
+import Home from './pages/Home';
 
 axios.defaults.baseURL = "http://localhost:8000/";
 axios.defaults.headers.post['Content-Type'] = 'application/json';
@@ -53,6 +54,7 @@ function App() {
 				<Switch>
 					
 					<Route exact path="/">
+						<Home></Home>
 					</Route>
 
 					<Route path="/login">

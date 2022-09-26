@@ -41,10 +41,19 @@ const Dashboard = () => {
 
     return (
         <div className="dashboard">
-            <h1>Dashboard</h1>
-            <Link to='/posts/create' className="btn btn-success btn-sm">Create New</Link>
+
+            <div className="row header">
+
+                <h1 className="col-6">Dashboard</h1>
+
+                <div className="col-6">
+                    <Link to='/posts/create' className="btn btn-success float-end" >Create New</Link>
+                </div>
+
+            </div>
+
             {posts && posts.map(post => (
-                <div className="card card-margins" key={post.id}>
+                <div className="card card-margins mb-4" key={post.id}>
                     <div className="card-body">
                         <h5 className="card-title">{post.title}</h5>
                         <p className="card-text">{post.description}</p>

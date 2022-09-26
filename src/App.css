@@ -1,81 +1,52 @@
-/* .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
-
-/* navbar styles start */
-nav {
-
-}
-/* navbar styles end */
-
 /* register page styles start */
 .register {
-    margin-top: 30px;
+  margin-top: 30px;
 }
 /* register page styles end */
 
 /* login page styles start */
 .login {
-    margin-top: 30px;
+  margin-top: 30px;
 }
 /* login page styles end */
 
 /* dashboard page styles start */
 .card-margins {
-  margin-bottom: 10px;
+margin-bottom: 10px;
 }
-
-.dashboard {
-  margin-top: 30px;
-}
-/* dashboard page styles end */
-
-
-
 
 /* comman styles start */
 .error-message {
-    color: #d51717;
-    font-weight: bold;
-    font-size: 14px;
+  color: #d51717;
+  font-weight: bold;
+  font-size: 14px;
 }
-
 .page-headings {
-    text-align: center;
+  text-align: center;
+}
+.container h1 ,
+.container .header a,  
+.container .header form {
+   margin: 1.5rem 0;
 }
 /* comman styles end */
+
+/* navigation bar styles start */
+.nav-link{
+border-radius: 0.25rem;
+}
+.nav-link:hover{
+color : #fff;
+background-color: #e7e7e7;
+}
+.nav-item button {
+border-width: 0.125rem;
+font-weight: 600;
+}
+/* navigation bar styles end */
+
+/* home styles start */
+.home{
+  margin: 8rem 0;
+}
+/* home styles end */

@@ -59,7 +59,7 @@ const Register = ({handleAuthStatus, handleUserTypeStatus, handleUserId}) => {
         <div className="register">
 
             <div className="row">
-                <div className="col-md-6 offset-md-3">
+                <div className="col-md-4 offset-md-4">
                     <form onSubmit={handleSubmit}>
 
                         <h1 className="page-headings">Register</h1>
@@ -85,7 +85,7 @@ const Register = ({handleAuthStatus, handleUserTypeStatus, handleUserId}) => {
                             <p className="error-message"><b>{register_input.error_list_array.password}</b></p> 
                         </div>
 
-                        <button type="submit" className="btn btn-primary">Submit</button>
+                        <button type="submit" className="btn btn-primary">Register</button>
 
                     </form>
                 </div>

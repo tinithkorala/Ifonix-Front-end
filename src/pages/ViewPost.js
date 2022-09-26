@@ -83,13 +83,14 @@ const ViewPost = (props) => {
         <div className="content">
             <h1>View Post</h1>
             {post && (
-                <div className="preview-post">
-                    <h2>{post.title}</h2>
-                    <p>{post.description}</p>
-                    {
-                        user_id == parseInt(post.user_id) && (<button onClick={handleDelete} className="btn btn-danger btn-sm">Delete</button>)
-                    }
-                    
+                <div className="preview-post card card-margin">
+                    <div className="card-body">
+                        <h2 className="card-title">{post.title}</h2>
+                        <p className="card-text">{post.description}</p>
+                        {
+                            user_id == parseInt(post.user_id) && (<button onClick={handleDelete} className="btn btn-danger">Delete</button>)
+                        }
+                    </div>
                 </div>
             )}
         </div>
