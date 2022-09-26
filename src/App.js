@@ -100,7 +100,7 @@ function App() {
 					{/* Guarded routes start */}
 					<GuardedRoutes path="/dashboard" component={Dashboard} auth={isAuthenticated} user_id={user_id} />
 					<GuardedRoutes path="/posts/create" component={Create} auth={isAuthenticated} user_id={user_id} />
-					<GuardedRoutes path="/posts/search" component={Search} auth={isAuthenticated} user_id={user_id} />
+					<GuardedRoutes path="/search" component={Search} auth={isAuthenticated} user_id={user_id} />
 					<GuardedRoutes path="/posts/:id" component={ViewPost} auth={isAuthenticated} user_id={user_id} />
 					{/* Guarded routes end */}
 

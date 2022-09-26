@@ -62,7 +62,7 @@ const Navbar = ({handleAuthStatus, isAuthenticated, userType}) => {
                                     </li>)
                                 }
                                 <li className="nav-item">
-                                    <Link className="nav-link active" aria-current="page" to="/posts/search">Search Posts</Link>
+                                    <Link className="nav-link active" aria-current="page" to="/search">Search Posts</Link>
                                 </li>
                             </ul>);
 
