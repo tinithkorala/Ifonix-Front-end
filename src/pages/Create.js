@@ -1,11 +1,11 @@
 import { useState } from "react";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
 
 const Create = () => {
 
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const [post_input, setPostInput] = useState({
         'title' : '',
@@ -49,7 +49,7 @@ const Create = () => {
                         icon: 'success',
                         text: res.data.message,
                     })
-                    history.push('/dashboard');
+                    navigate('/dashboard');
                 }else if(res.data.status === 503) {
                     Swal.fire({
                         icon: 'error',

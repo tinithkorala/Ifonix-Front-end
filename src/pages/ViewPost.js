@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Swal from 'sweetalert2';
 
 const ViewPost = (props) => {
@@ -46,7 +46,7 @@ const ViewPost = (props) => {
 
     }
 
-    const history = useHistory()
+    const navigate = useNavigate();
 
     const handleDelete = () => {
 
@@ -58,7 +58,7 @@ const ViewPost = (props) => {
                         icon: 'success',
                         text: res.data.message,
                     })
-                    history.push('/dashboard');
+                    navigate('/dashboard');
                 }else if(res.data.status === 503) {
                     Swal.fire({
                         icon: 'error',
@@ -88,7 +88,7 @@ const ViewPost = (props) => {
                         <h2 className="card-title">{post.title}</h2>
                         <p className="card-text">{post.description}</p>
                         {
-                            user_id == parseInt(post.user_id) && (<button onClick={handleDelete} className="btn btn-danger">Delete</button>)
+                            parseInt(user_id) === parseInt(post.user_id) && (<button onClick={handleDelete} className="btn btn-danger">Delete</button>)
                         }
                     </div>
                 </div>

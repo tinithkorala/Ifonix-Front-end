@@ -1,10 +1,11 @@
 import { useState } from "react";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2';
 
 const Login = ({handleAuthStatus, handleUserTypeStatus, handleUserId}) => {
 
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const [login_input, setLoginInput] = useState({
         'email' : '',
@@ -41,7 +42,7 @@ const Login = ({handleAuthStatus, handleUserTypeStatus, handleUserId}) => {
                     handleUserTypeStatus(localStorage.getItem('auth_user_type'));
                     handleUserId(localStorage.getItem('auth_id'));
                     console.log(res.data.message);
-                    history.push('/dashboard');
+                    navigate('/dashboard');
 
                 }else if(res.data.status === 401) {
 
@@ -50,6 +51,11 @@ const Login = ({handleAuthStatus, handleUserTypeStatus, handleUserId}) => {
                         'error_list' : []
                     });
                     console.log(res.data.message);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: res.data.message,
+                    });
 
                 }else if(res.data.status === 400){
 

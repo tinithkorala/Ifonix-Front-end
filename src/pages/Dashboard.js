@@ -57,7 +57,7 @@ const Dashboard = () => {
                     <div className="card-body">
                         <h5 className="card-title">{post.title}</h5>
                         <p className="card-text">{post.description}</p>
-                        <Link to={`posts/${post.id}`} className="btn btn-primary">View</Link>
+                        <Link to={`/posts/${post.id}`} className="btn btn-primary">View</Link>
                     </div>
                 </div>
             ))}

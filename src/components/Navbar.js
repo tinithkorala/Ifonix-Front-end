@@ -1,10 +1,10 @@
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = ({handleAuthStatus, isAuthenticated, userType}) => {
 
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const logoutSubmit = (e) => {
 
@@ -16,7 +16,7 @@ const Navbar = ({handleAuthStatus, isAuthenticated, userType}) => {
                 localStorage.removeItem('auth_name');
                 handleAuthStatus(false);
                 console.log(res.data.message)
-                history.push('/login');
+                navigate('/login');
 
             }
 
@@ -56,7 +56,7 @@ const Navbar = ({handleAuthStatus, isAuthenticated, userType}) => {
                                 <li className="nav-item">
                                     <Link className="nav-link active mx-2" aria-current="page" to="/dashboard">Dashboard</Link>
                                 </li>
-                                {(userType == 1) && 
+                                {(parseInt(userType) === 1) && 
                                     (<li className="nav-item">
                                         <Link className="nav-link active mx-2" aria-current="page" to="/posts-manage">Manage Posts</Link>
                                     </li>)

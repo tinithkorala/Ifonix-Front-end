@@ -1,10 +1,10 @@
 import axios from "axios";
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Register = ({handleAuthStatus, handleUserTypeStatus, handleUserId}) => {
 
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const [register_input, setRegisterInput] = useState({
         'name' : '',
@@ -41,8 +41,8 @@ const Register = ({handleAuthStatus, handleUserTypeStatus, handleUserId}) => {
                     handleAuthStatus(true);
                     handleUserTypeStatus(localStorage.getItem('auth_user_type'));
                     handleUserId(localStorage.getItem('auth_id'));
-                    alert(res.data.message);
-                    history.push('/dashboard');
+                    // alert(res.data.message);
+                    navigate('/dashboard');
 
                 }else if(res.data.status === 400) {
                 

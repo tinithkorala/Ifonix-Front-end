@@ -1,6 +1,6 @@
 import './App.css';
 import Navbar from './components/Navbar';
-import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
 import Register from './pages/Register';
 import axios from "axios";
 import Dashboard from './pages/Dashboard';
@@ -9,7 +9,7 @@ import Create from './pages/Create';
 import ManagePosts from './pages/ManagePosts';
 import Search from './pages/Search';
 import ViewPost from './pages/ViewPost';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import GuardedRoutes from './components/GuardedRoutes';
 import AdminGuardedRoutes from './components/AdminGuardedRoutes';
 import Home from './pages/Home';
@@ -51,69 +51,53 @@ function App() {
 
 			<div className="container">
 
-				<Switch>
+				<Routes>
 					
-					<Route exact path="/">
-						<Home></Home>
-					</Route>
+					<Route path="/" element={<Home />} />
 
-					<Route path="/login">
-						{	isAuthenticated ? 
-							<Redirect to='/dashboard' /> : 
-							<Login handleAuthStatus={handleAuthStatus} 
-							handleUserTypeStatus={handleUserTypeStatus}  
-							handleUserId={handleUserId} />
+					<Route 
+						path="/login" 
+						element={
+							isAuthenticated ? 
+							<Navigate to="/dashboard" /> :   
+							<Login 
+								handleAuthStatus={handleAuthStatus} 
+								handleUserTypeStatus={handleUserTypeStatus}  
+								handleUserId={handleUserId} 
+							/>
 						}
-					</Route>
+					/>
 
-					<Route path="/register">
-						{	isAuthenticated ? 
-							<Redirect to='/dashboard' /> : 
+					<Route 
+						path="/register"
+						element={
+							isAuthenticated ? 
+							<Navigate to="/dashboard" /> :
 							<Register 
-							handleAuthStatus={handleAuthStatus} 
-							handleUserTypeStatus={handleUserTypeStatus}
-							handleUserId={handleUserId} />
+								handleAuthStatus={handleAuthStatus} 
+								handleUserTypeStatus={handleUserTypeStatus}  
+								handleUserId={handleUserId} 
+							/>
 						}
+					/>
+
+					{/* Protected_routes_start */}
+					<Route element={<GuardedRoutes auth={isAuthenticated} />} >
+						<Route path='/dashboard' element={<Dashboard />}></Route>
+						<Route path='/posts/create' element={<Create />}></Route>
+						<Route path='/search' element={<Search />}></Route>
+						<Route path='/posts/:id' element={<ViewPost user_id={user_id}/>} ></Route>
 					</Route>
-
-					{/* this routs need to be protected */}
-					{/* <Route path="/dashboard">
-						<Dashboard></Dashboard>
-					</Route> */}
-
-					{/* <Route path="/posts-manage">
-						<ManagePosts></ManagePosts>
-					</Route>
-
-					<Route path="/posts/create">
-						<Create></Create>
-					</Route>
-
-					<Route path="/posts/search">
-						<Search></Search>
-					</Route>
-
-					<Route path="/posts/:id">
-						<ViewPost></ViewPost>
-					</Route> */}
-
-					{/* this routs need to be protected */}
 					
-					{/* Guarded routes start */}
-					<GuardedRoutes path="/dashboard" component={Dashboard} auth={isAuthenticated} user_id={user_id} />
-					<GuardedRoutes path="/posts/create" component={Create} auth={isAuthenticated} user_id={user_id} />
-					<GuardedRoutes path="/search" component={Search} auth={isAuthenticated} user_id={user_id} />
-					<GuardedRoutes path="/posts/:id" component={ViewPost} auth={isAuthenticated} user_id={user_id} />
-					{/* Guarded routes end */}
-
-					{/* Admin Guarded routes start */}
-					<AdminGuardedRoutes path="/posts-manage" component={ManagePosts} auth={isAuthenticated} userType={userType} />
-					{/* Admin Guarded routes end */}
-
-					
-				</Switch>
+					<Route element={<AdminGuardedRoutes auth={isAuthenticated} userType={userType} />} >
+						<Route path='posts-manage' element={<ManagePosts />}></Route>
+					</Route>
+					{/* Protected_routes_end */}
+	
+				</Routes>
 
 			</div>
+
 		</Router>
         
     );
