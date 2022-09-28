@@ -62,27 +62,27 @@ const Register = ({handleAuthStatus, handleUserTypeStatus, handleUserId}) => {
                 <div className="col-md-4 offset-md-4">
                     <form onSubmit={handleSubmit}>
 
-                        <h1 className="page-headings">Register</h1>
+                        <h1 className="text-center">Register</h1>
 
                         <div className="mb-3">
                             <label className="form-label">Name</label>
                             <input type="text" className="form-control" name="name" value={register_input.name} onChange={handleInput} />
-                            <p className="error-message"><b>{register_input.error_list_array.name}</b></p>
+                            <p className="text-danger fw-light"><b>{register_input.error_list_array.name}</b></p>
                         </div>
                         <div className="mb-3">
                             <label className="form-label">Email Address</label>
                             <input type="text" className="form-control" name="email" value={register_input.email} onChange={handleInput} />
-                            <p className="error-message"><b>{register_input.error_list_array.email}</b></p>
+                            <p className="text-danger fw-light"><b>{register_input.error_list_array.email}</b></p>
                         </div>
                         <div className="mb-3">
                             <label className="form-label">Password</label>
                             <input type="password" className="form-control" name="password" value={register_input.password} onChange={handleInput} />
-                            <p className="error-message"><b>{register_input.error_list_array.password}</b></p>
+                            <p className="text-danger fw-light"><b>{register_input.error_list_array.password}</b></p>
                         </div>
                         <div className="mb-3">
                             <label className="form-label">Confirm Password</label>
                             <input type="password" className="form-control" name="password_confirmation" value={register_input.password_confirmation} onChange={handleInput} />
-                            <p className="error-message"><b>{register_input.error_list_array.password}</b></p> 
+                            <p className="text-danger fw-light"><b>{register_input.error_list_array.password}</b></p> 
                         </div>
 
                         <button type="submit" className="btn btn-primary">Register</button>

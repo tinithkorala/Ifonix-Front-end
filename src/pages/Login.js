@@ -77,17 +77,17 @@ const Login = ({handleAuthStatus, handleUserTypeStatus, handleUserId}) => {
                     <div className="col-md-4 offset-md-4">
                         <form onSubmit={handleSubmit}>
 
-                            <h1 className="page-headings">Login</h1>
+                            <h1 className="text-center">Login</h1>
 
                             <div className="mb-3">
                                 <label className="form-label">Email Address</label>
                                 <input type="text" className="form-control" name="email" onChange={handleInput} value={login_input.email} />
-                                <p className="error-message"><b>{login_input.error_list.email}</b></p>
+                                <p className="text-danger fw-light"><b>{login_input.error_list.email}</b></p>
                             </div>
                             <div className="mb-3">
                                 <label className="form-label">Password</label>
                                 <input type="password" className="form-control" name="password" onChange={handleInput} value={login_input.password} />
-                                <p className="error-message"><b>{login_input.error_list.password}</b></p>
+                                <p className="text-danger fw-light"><b>{login_input.error_list.password}</b></p>
                             </div>
 
                             <button type="submit" className="btn btn-primary">Login</button>

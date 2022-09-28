@@ -32,10 +32,10 @@ const Navbar = ({handleAuthStatus, isAuthenticated, userType}) => {
         auth_buttons = (<div className="d-flex">
                             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li className="nav-item">
-                                    <Link to="/login" className="nav-link active">Login</Link>
+                                    <Link to="/login" className="nav-link rounded active">Login</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link to="/register" className="nav-link active">Register</Link>
+                                    <Link to="/register" className="nav-link rounded active">Register</Link>
                                 </li>
                             </ul>
                         </div>);
@@ -47,22 +47,22 @@ const Navbar = ({handleAuthStatus, isAuthenticated, userType}) => {
         auth_buttons = (<div className="d-flex">
                             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li className="nav-item">
-                                <button className="btn btn-outline-danger" type="button" onClick={logoutSubmit}>Logout</button>
+                                <button className="btn btn-outline-danger border-2 fw-semibold" type="button" onClick={logoutSubmit}>Logout</button>
                                 </li>
                             </ul>
                         </div>);
 
         protected_links =   (<ul className="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li className="nav-item">
-                                    <Link className="nav-link active mx-2" aria-current="page" to="/dashboard">Dashboard</Link>
+                                    <Link className="nav-link rounded active mx-2" aria-current="page" to="/dashboard">Dashboard</Link>
                                 </li>
                                 {(parseInt(userType) === 1) && 
                                     (<li className="nav-item">
-                                        <Link className="nav-link active mx-2" aria-current="page" to="/posts-manage">Manage Posts</Link>
+                                        <Link className="nav-link rounded active mx-2" aria-current="page" to="/posts-manage">Manage Posts</Link>
                                     </li>)
                                 }
                                 <li className="nav-item">
-                                    <Link className="nav-link active mx-2" aria-current="page" to="/search">Search Posts</Link>
+                                    <Link className="nav-link rounded active mx-2" aria-current="page" to="/search">Search Posts</Link>
                                 </li>
                             </ul>);
 
