@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Register = ({handleAuthStatus, handleUserTypeStatus, handleUserId}) => {
 
@@ -32,7 +33,9 @@ const Register = ({handleAuthStatus, handleUserTypeStatus, handleUserId}) => {
         axios.get('/sanctum/csrf-cookie').then(response => {
             axios.post('api/register', submit_data_obj).then(res => {
 
-                if(res.data.status === 201) {
+                console.log(res);   
+
+                if(res.status === 201) {
 
                     localStorage.setItem('auth_token', res.data.token);
                     localStorage.setItem('auth_name', res.data.user_name);
@@ -41,13 +44,24 @@ const Register = ({handleAuthStatus, handleUserTypeStatus, handleUserId}) => {
                     handleAuthStatus(true);
                     handleUserTypeStatus(localStorage.getItem('auth_user_type'));
                     handleUserId(localStorage.getItem('auth_id'));
-                    // alert(res.data.message);
                     navigate('/dashboard');
 
-                }else if(res.data.status === 400) {
-                
-                    setRegisterInput({...register_input, error_list_array : res.data.validation_errors});
+                }
 
+            }).catch(error => {
+
+                console.log(error.response);
+
+                if(error.response.status === 400) {
+                    setRegisterInput({...register_input, error_list_array : error.response.data.validation_errors});
+                }
+
+                if(error.response.status === 500) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: error.response.data.message
+                    });
                 }
 
             });
