@@ -35,12 +35,7 @@ const Create = () => {
             axios.post('api/posts', submit_data_obj)
             .then((res) => {
 
-                if(res.data.status === 204) {
-                    setPostInput({
-                        ...post_input,
-                        'error_list_array' : res.data.validation_errors
-                    });
-                }else if(res.data.status === 201) {
+                if(res.status === 201) {
                     setPostInput({
                         ...post_input,
                         'error_list_array' : []
@@ -50,24 +45,29 @@ const Create = () => {
                         text: res.data.message,
                     })
                     navigate('/dashboard');
-                }else if(res.data.status === 503) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: res.data.message,
-                    });
                 }
 
             })
-            .catch(err => {
-                console.log(err.message);
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Try Again Later',
-                });
-            });
+            .catch(error => {
 
+                console.log(error.response);
+
+                if(error.response.status === 400) {
+                    setPostInput({
+                        ...post_input,
+                        'error_list_array' : error.response.data.validation_errors
+                    });
+                }
+
+                if(error.response.status === 500) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: error.response.data.message
+                    });
+                }
+
+            });
         });
 
     }
