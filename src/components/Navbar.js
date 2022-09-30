@@ -10,7 +10,7 @@ const Navbar = ({handleAuthStatus, isAuthenticated, userType}) => {
 
         axios.post('api/logout').then(res => {
 
-            if(res.data.status === 200) {
+            if(res.status === 200) {
 
                 localStorage.removeItem('auth_token');
                 localStorage.removeItem('auth_name');
@@ -18,6 +18,27 @@ const Navbar = ({handleAuthStatus, isAuthenticated, userType}) => {
                 console.log(res.data.message)
                 navigate('/login');
 
+            }
+
+        })
+        .catch(error => {
+
+            console.log(error.response);
+
+            if(error.response.status === 401) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Unauthenticated'
+                });
+            }
+
+            if(error.response.status === 500) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: error.response.data.message
+                });
             }
 
         });
