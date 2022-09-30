@@ -32,7 +32,7 @@ const Login = ({handleAuthStatus, handleUserTypeStatus, handleUserId}) => {
         axios.get('/sanctum/csrf-cookie').then(response => {
             axios.post('api/login', submit_data_obj).then(res => {
 
-                if(res.data.status === 200) {
+                if(res.status === 201) {
 
                     localStorage.setItem('auth_token', res.data.token);
                     localStorage.setItem('auth_name', res.data.user_name);
@@ -44,26 +44,37 @@ const Login = ({handleAuthStatus, handleUserTypeStatus, handleUserId}) => {
                     console.log(res.data.message);
                     navigate('/dashboard');
 
-                }else if(res.data.status === 401) {
+                }
 
+            }).catch(error => {
+
+                console.log(error.response);
+
+                if(error.response.status === 400) {
+                    setLoginInput({
+                        ...login_input,
+                        'error_list' : error.response.data.validation_errors
+                    });
+                }
+
+                if(error.response.status === 401) {
                     setLoginInput({
                         ...login_input,
                         'error_list' : []
                     });
-                    console.log(res.data.message);
                     Swal.fire({
                         icon: 'error',
                         title: 'Oops...',
-                        text: res.data.message,
+                        text: error.response.data.message,
                     });
+                }
 
-                }else if(res.data.status === 400){
-
-                    setLoginInput({
-                        ...login_input,
-                        'error_list' : res.data.validation_errors
+                if(error.response.status === 500) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: error.response.data.message
                     });
-
                 }
 
             });
