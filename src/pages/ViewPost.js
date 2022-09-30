@@ -21,26 +21,41 @@ const ViewPost = (props) => {
             axios.get('api/posts/'+id)
             .then((res) => {
 
-                if(res.data.status === 200)  {
+                if(res.status === 200)  {
 
                     setPost(res.data.data_set);
 
-                }else if(res.data.status === 503) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: res.data.message,
-                    });
                 }
 
             })
-            .catch(err => {
-                console.log(err.message);
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Try Again Later',
-                });
+            .catch(error => {
+
+                console.log(error.response);
+
+                if(error.response.status === 401) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Unauthenticated'
+                    });
+                }
+
+                if(error.response.status === 404) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: error.response.data.message
+                    });
+                }
+
+                if(error.response.status === 500) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: error.response.data.message
+                    });
+                }
+
             });
         });
 
