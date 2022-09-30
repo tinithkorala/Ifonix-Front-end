@@ -11,7 +11,7 @@ const Navbar = ({handleAuthStatus, isAuthenticated, userType}) => {
 
         axios.post('api/logout').then(res => {
 
-            if(res.status === 200) {
+            if(res.status === 201) {
 
                 localStorage.removeItem('auth_token');
                 localStorage.removeItem('auth_name');
