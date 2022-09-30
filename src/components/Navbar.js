@@ -15,6 +15,8 @@ const Navbar = ({handleAuthStatus, isAuthenticated, userType}) => {
 
                 localStorage.removeItem('auth_token');
                 localStorage.removeItem('auth_name');
+                localStorage.removeItem('auth_user_type');
+                localStorage.removeItem('auth_id');
                 handleAuthStatus(false);
                 console.log(res.data.message)
                 navigate('/login');
