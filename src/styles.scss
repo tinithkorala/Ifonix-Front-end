@@ -1,6 +1,7 @@
 $page-margin : 5rem 0;
 $hero-margin : 9rem 0;
 $color-hover : #d0d0d0;
+$swagger: #85ea2d;
 
 .container {
 
@@ -36,4 +37,13 @@ $color-hover : #d0d0d0;
     
     }
 
+}
+
+.bg-swagger {
+
+    background-color: $swagger;
+
+    &:hover {
+        background-color: darken($swagger, 10%);
+    }
 }
