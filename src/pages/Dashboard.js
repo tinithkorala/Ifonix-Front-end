@@ -17,23 +17,32 @@ const Dashboard = () => {
         axios.get('/sanctum/csrf-cookie').then(response => {
             axios.get('api/posts')
             .then((res) => {
-                if(res.data.status === 200) {
+                if(res.status === 200) {
+
                     setPosts(res.data.data_set);
-                }else if(res.data.status === 503) {
+                    
+                }
+            })
+            .catch(error => {
+
+                console.log(error.response);
+
+                if(error.response.status === 401) {
                     Swal.fire({
                         icon: 'error',
                         title: 'Oops...',
-                        text: res.data.message,
+                        text: 'Unauthenticated'
                     });
                 }
-            })
-            .catch(err => {
-                console.log(err.message);
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Try Again Later',
-                });
+
+                if(error.response.status === 500) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: error.response.data.message
+                    });
+                }
+
             });
         });
 
